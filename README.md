@@ -3,7 +3,7 @@
 # Bubbles Raytracing Renderer
  
 The Bubbles raytracing rendering engine is a GUI offline raytracing engine project which only renders `Bubbles` (spheres) using C++. <br/>
-Qt is used for the GUI. 2D graphics & icons were made with Adobe Illustrator.
+Qt is used for the GUI. 2D graphics & icons are made with Adobe Illustrator.
 
 The Bubbles app will be a relatively simple 3D DCC program, where you can place spheres around the scene, assign materials, and render a final image. <br/>
 My focus on this project is to get it to work at all, optimization is less important to me in this project as I am still learning the basics of graphics programming. <br/>
