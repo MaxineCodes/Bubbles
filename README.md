@@ -3,5 +3,5 @@
 
 Mockup of the UI:
 
-![image](https://user-images.githubusercontent.com/89635193/192791915-672c5de8-b12d-4fa5-992b-0996c8498369.png)
+![image](https://github.com/MaxineCodes/Bubbles/blob/master/Sketches/UI_Mockup.png)
 
