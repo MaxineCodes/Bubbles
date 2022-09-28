@@ -9,7 +9,7 @@ The Bubbles app will be a relatively simple 3D DCC program, where you can place 
 My focus on this project is to get it to work at all, optimization is less important to me in this project as I am still learning the basics of graphics programming. <br/>
 I hope this project turns out well!!
 
-# Planned features:
+## Planned features:
 
 - ❌ Raytrace rendering
 - ❌ Camera
@@ -26,13 +26,18 @@ I hope this project turns out well!!
 - ❌ UI: Property Editor
 - ❌ UI: Material Editor
 - ❌ UI: Camera/Render Editor
-<br/>
 
-## Potential features if it's not too difficult:
+Potential features if it's not too difficult:
 
 - ❌ Rendering in-viewport
 - ❌ Preview rendering with dynamic sampling
 - ❌ Support for Android/iOS
+<br/>
+
+---
+
+<br/>
+<br/>
 
 ---
 
