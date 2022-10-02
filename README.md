@@ -44,7 +44,23 @@ Potential features if it's not too difficult:
 # Blog
 
 
-Mockup of the UI:
+## Mockup of the UI:
 
-![image](https://github.com/MaxineCodes/Bubbles/blob/master/Sketches/UI_Mockup.png)
+![image](https://github.com/MaxineCodes/Bubbles/blob/master/Blog/UI_Mockup.png)
+
+Before starting, I try to plan for the final functionality. To summarize, the Bubbles GUI must allow the user to create new objects, manipulate these objects, create and modify materials, an outliner for both the materials and objects to keep an easy overview. The viewport must be able to show a live updating preview of the final scene, and there must be controls to modify the live preview. Finally it needs to be able to render the final image. First priority: render preview!
+
+For funsies I made a cute icon and a banner for the project!! 
+
+---
+
+## First working UI:
+
+![image](https://github.com/MaxineCodes/Bubbles/blob/master/Blog/first_ui.jpg)
+
+This UI is very barebones and not very pretty. The renderbutton does work however, and it will render an image outputted by the raytracing function. This image can be updated and thus provides the basis to create the live updating viewport. The next target is to introduce more advanced raytracing functionality and experiment with how the performance keeps up, and finding potential problems that need to be solved.
+
+Getting the UI to work took a bit of effort as this is my first time using the Qt framework in C++. Thankfully I managed to figure it out after research and it's working as I originally intended. It was easier than I originally anticipated, probably because I often overcomplicate these sorts of things..
+
+---
 
