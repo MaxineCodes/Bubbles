@@ -3,18 +3,22 @@
 #include <QtWidgets/QWidget>
 #include "ui_bubbles.h"
 
-class BubblesUI : public QWidget
+// Qt gui class
+class bubblesGui : public QWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-
-    // New widget without parent
-    BubblesUI(QWidget *parent = nullptr);
-    ~BubblesUI();
+	// Constructor and destructor
+	bubblesGui(QWidget* parent = nullptr);
+	~bubblesGui();
 
 private:
+	// Define ui class
+	Ui::BubblesClass ui;
 
-    // Define ui class
-    Ui::BubblesClass ui;
+private slots:
+	// Defining functions to be called by the GUI events (such as button clicked)
+	void on_renderButton_clicked();
+
 };

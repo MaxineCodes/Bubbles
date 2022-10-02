@@ -110,8 +110,8 @@ void writeColour(std::ostream& out, colour pixelColour)
 void writeQImage32()
 {
 	// Preset colours
-	constexpr QRgb c_Magenta = qRgb(255, 0, 255);
-	constexpr QRgb c_Black = qRgb(0, 0, 0);
+	constexpr QRgb c_Magenta		= qRgb(255, 0  , 255);
+	constexpr QRgb c_Black		= qRgb(0  , 0  , 0  );
 
 	// Fill with colour
 	QImage32bit.fill(c_Black);
