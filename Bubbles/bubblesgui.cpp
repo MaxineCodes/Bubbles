@@ -25,24 +25,11 @@ bubblesGui::~bubblesGui()
 // When the render button is pressed
 void bubblesGui::on_renderButton_clicked()
 {
-	qDebug() << "- Render Pressed";
-	std::cout << "- Render Pressed";
+	std::cout << "- Render Pressed" << "\n";
+	// Size view to the same size as the raytrace render output & fill with black
 	ui.viewLabel->resize(scene::image_width, scene::image_height);
-
-	writeQImage32();
-
+	QImage32bit.fill(qRgb(0, 0, 0));
+	// Raytrace and add image to the view
+	raytrace();
 	ui.viewLabel->setPixmap(QPixmap::fromImage(QImage32bit));
-
-	//ui.graphic->addPixmap(QPixmap::fromImage(image));
-
-	//QGraphicsScene* scene = new QGraphicsScene;
-	//scene->addPixmap(QPixmap::fromImage(QImage32bit));
-	//QGraphicsView(scene);
-
-	//QGraphicsScene scene;
-	//QGraphicsView view(scene);
-	//QGraphicsPixmapItem item(QPixmap::fromImage(QImage32bit));
-	//scene.addItem(&item);
-	//view.show();
-	//raytrace();
 }

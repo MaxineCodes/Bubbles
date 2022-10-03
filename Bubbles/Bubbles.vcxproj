@@ -85,15 +85,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="rayCollision.cpp" />
     <QtRcc Include="bubbles.qrc" />
     <QtUic Include="bubbles.ui" />
     <QtMoc Include="bubblesgui.h" />
+    <ClCompile Include="bubble.cpp" />
     <ClCompile Include="bubblesgui.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bubble.h" />
+    <ClInclude Include="ray.h" />
+    <ClInclude Include="rayCollision.h" />
     <ClInclude Include="raytrace.h" />
     <ClInclude Include="scene.h" />
+    <ClInclude Include="utils.h" />
     <ClInclude Include="vector3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

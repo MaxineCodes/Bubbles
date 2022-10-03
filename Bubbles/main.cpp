@@ -25,9 +25,7 @@
 #include "bubblesgui.h"
 #include <QtWidgets/QApplication>
 #include <qfile.h>
-// Raytracing includes
-//#include "main.h"
-//#include "raytrace.h"
+
 
 // Application entrypoint
 int main(int argc, char* argv[])
@@ -42,10 +40,6 @@ int main(int argc, char* argv[])
 	QString styleSheet = QLatin1String(styleSheetFile.readAll());
 	// Set the style
 	app.setStyleSheet(styleSheet);
-
-	//connect(ui->renderButton, ui.renderButton.pressed(), render);
-
-	//bubblesGui.connect(ui.renderButton, SIGNAL(clicked()), SLOT(bubblesGui::render()));
 
 	// Show gui
 	guiWindow.showMaximized();
