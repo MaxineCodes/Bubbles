@@ -64,3 +64,9 @@ Getting the UI to work took a bit of effort as this is my first time using the Q
 
 ---
 
+## Raytracing, normals and object-oriented!
+
+![image](https://github.com/MaxineCodes/Bubbles/blob/master/Blog/first_raytrace.jpg)
+
+Normals are calculated and displayed as image and there is a scene object, as well as a list of objects that can be added to easily.
+
