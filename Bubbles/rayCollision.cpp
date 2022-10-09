@@ -13,7 +13,7 @@ objectList::objectList(std::shared_ptr<collidable> object)
 }
 
 // Object in objectList is hit
-bool objectList::hit(const ray& _ray, float t_min, float t_max, objectRecord& rec) const
+bool objectList::hit(const ray& _ray, double t_min, double t_max, objectRecord& rec) const
 {
     objectRecord temp_rec;
     bool hit_anything = false;

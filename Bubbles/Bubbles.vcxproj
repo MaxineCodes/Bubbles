@@ -85,6 +85,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="rayCollision.cpp" />
     <QtRcc Include="bubbles.qrc" />
     <QtUic Include="bubbles.ui" />
@@ -95,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bubble.h" />
+    <ClInclude Include="camera.h" />
     <ClInclude Include="ray.h" />
     <ClInclude Include="rayCollision.h" />
     <ClInclude Include="raytrace.h" />

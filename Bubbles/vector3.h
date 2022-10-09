@@ -8,24 +8,24 @@
 // Vector3 Struct
 struct vector3
 {
-	float e[3];
+	double e[3];
 
 	// Colour
 	vector3() : e{ 0,0,0 } {}
 	// 3D Coords
-	vector3(float e0, float e1, float e2) : e{ e0, e1, e2 } {}
+	vector3(double e0, double e1, double e2) : e{ e0, e1, e2 } {}
 
-	float x() const { return e[0]; }
-	float y() const { return e[1]; }
-	float z() const { return e[2]; }
+	double x() const { return e[0]; }
+	double y() const { return e[1]; }
+	double z() const { return e[2]; }
 
 	vector3 operator-() const {
 		return vector3(-e[0], -e[1], -e[2]);
 	}
-	float operator[](int i) const {
+	double operator[](int i) const {
 		return e[i];
 	}
-	float& operator[](int i) {
+	double& operator[](int i) {
 		return e[i];
 	}
 
@@ -37,7 +37,7 @@ struct vector3
 		return *this;
 	}
 
-	vector3& operator*=(const float t)
+	vector3& operator*=(const double t)
 	{
 		e[0] *= t;
 		e[1] *= t;
@@ -45,17 +45,17 @@ struct vector3
 		return *this;
 	}
 
-	vector3& operator/=(const float t)
+	vector3& operator/=(const double t)
 	{
 		return *this *= 1 / t;
 	}
 
-	float length() const
+	double length() const
 	{
 		return std::sqrt(length_squared());
 	}
 
-	float length_squared() const
+	double length_squared() const
 	{
 		return e[0] * e[0] + e[1] * e[1] + e[2] * e[2];
 	}

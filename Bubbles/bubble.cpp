@@ -8,7 +8,7 @@ bubble::bubble(point3 _center, double _radius) : center(_center), radius(_radius
 }
 
 
-bool bubble::hit(const ray& _ray, float t_min, float t_max, objectRecord& rec) const
+bool bubble::hit(const ray& _ray, double t_min, double t_max, objectRecord& rec) const
 {
     vector3 oc = _ray.origin() - center;
     auto a = _ray.direction().length_squared();

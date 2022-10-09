@@ -6,30 +6,25 @@
 #include "utils.h"
 
 
-// Scene world where objects are placed
-objectList sceneObjectList;
-
 // Scene class is a collection class of the image, camera, and world data
 class scene
 {
 public:
+	// Render variables
+	static const bool antialiasingEnabled = true;
+
 	// Image variables
-	static const int image_width = 800;
-	static const int image_height = 400;
-	static const int aspect_ratio = image_width / image_height;
-	static const int raytraceSamples = 2;
+	static const int image_width = 400;
+	static const int image_height = 200;
+	double aspect_ratio = image_width / image_height;
+	static const int raytraceSamples = 50;
 
 	// Camera variables
+	double focal_length = 1.0;
 
 	// World variables
-	
+
+public:
+	// Public functions
+	static void populate(objectList);
 };
-
-void populateScene() 
-{
-	sceneObjectList.add(std::make_shared<bubble>(point3(0, 0, -1), 0.5));
-	sceneObjectList.add(std::make_shared<bubble>(point3(0, -5.5, -1), 5));
-}
-
-//std::shared_ptr<scene> Scene;
-//Scene = std::make_shared<scene>(0);

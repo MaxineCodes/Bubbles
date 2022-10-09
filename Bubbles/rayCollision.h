@@ -8,7 +8,7 @@ struct objectRecord
 {
     point3 p;
     vector3 normal;
-    float t{};
+    double t{};
 
     // Calculate normal face
     bool frontFace;
@@ -22,7 +22,7 @@ struct objectRecord
 class collidable 
 {
 public:
-    virtual bool hit(const ray& _ray, float t_min, float t_max, objectRecord& rec) const = 0;
+    virtual bool hit(const ray& _ray, double t_min, double t_max, objectRecord& rec) const = 0;
 };
 
 // List of ray-collidable objects 
@@ -35,7 +35,7 @@ public:
     // Public functions
     objectList();
     objectList(std::shared_ptr<collidable> object);
-    virtual bool hit(const ray& _ray, float t_min, float t_max, objectRecord& rec) const override;
+    virtual bool hit(const ray& _ray, double t_min, double t_max, objectRecord& rec) const override;
     void clear();
     void add(std::shared_ptr<collidable> object);
 };

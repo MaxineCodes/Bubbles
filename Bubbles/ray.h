@@ -19,7 +19,7 @@ public:
 	vector3 direction() const {
 		return dir;
 	}
-	point3 at(float t) const {
+	point3 at(double t) const {
 		return orig + t * dir;
 	}
 };
