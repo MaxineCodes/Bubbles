@@ -1,7 +1,6 @@
 #pragma once
 
 #include "utils.h"
-#include "ray.h"
 
 
 struct objectRecord 
@@ -11,7 +10,7 @@ struct objectRecord
     double t{};
 
     // Calculate normal face
-    bool frontFace;
+    bool frontFace{};
     inline void setFaceNormal(const ray& _ray, const vector3& outward_normal)
     {
         frontFace = dot(_ray.direction(), outward_normal) < 0;

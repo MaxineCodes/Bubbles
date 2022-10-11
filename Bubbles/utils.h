@@ -6,9 +6,6 @@
 #include <memory>
 #include <vector>
 #include <random>
-// Raytrace includes
-#include "ray.h"
-#include "vector3.h"
 
 // Constants
 const double infinity = std::numeric_limits<double>::infinity();
@@ -30,6 +27,11 @@ inline double randomDouble()
     static std::mt19937 generator;
     return distribution(generator);
 }
+// Random double with min-max
+inline double randomDouble(double min, double max) 
+{
+    return min + (max - min) * randomDouble();
+}
 
 // Clamping
 inline double clamp(double value, double min, double max) 
@@ -38,3 +40,8 @@ inline double clamp(double value, double min, double max)
     if (value > max) return max;
     return value;
 }
+
+
+// Raytrace includes
+#include "ray.h"
+#include "vector3.h"

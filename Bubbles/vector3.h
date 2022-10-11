@@ -59,6 +59,15 @@ struct vector3
 	{
 		return e[0] * e[0] + e[1] * e[1] + e[2] * e[2];
 	}
+	inline static vector3 random() 
+	{
+		return vector3(randomDouble(), randomDouble(), randomDouble());
+	}
+
+	inline static vector3 random(double min, double max) 
+	{
+		return vector3(randomDouble(min, max), randomDouble(min, max), randomDouble(min, max));
+	}
 };
 
 // Type aliases for vector3
@@ -119,4 +128,19 @@ inline vector3 cross(const vector3& u, const vector3& v)
 inline vector3 unit_vector(vector3 v)
 {
 	return v / v.length();
+}
+
+static vector3 random_in_unit_sphere() 
+{
+	while (true) 
+	{
+		auto p = vector3::random(-1, 1);
+		if (p.length_squared() >= 1) continue;
+		return p;
+	}
+}
+
+static vector3 random_unit_vector() 
+{
+	return unit_vector(random_in_unit_sphere());
 }

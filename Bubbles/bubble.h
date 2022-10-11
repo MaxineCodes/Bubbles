@@ -1,7 +1,6 @@
 #pragma once
 
 #include "rayCollision.h"
-#include "vector3.h"
 
 // Bubble class
 class bubble : public collidable 

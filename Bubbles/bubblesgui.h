@@ -17,6 +17,14 @@ private:
 	// Define ui class
 	Ui::BubblesClass ui;
 
+public: 
+	// GUI functions
+	void setViewportImage(QImage image);
+	void setProgressbarValue(int progress);
+	void render();
+	void previewRender();
+	void reset();
+
 private slots:
 	// Defining functions to be called by the GUI events (such as button clicked)
 	void on_renderButton_clicked();

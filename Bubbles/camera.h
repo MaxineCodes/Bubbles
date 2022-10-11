@@ -16,11 +16,6 @@ public:
     camera()
     {
         // Image variables
-        /*
-        auto viewport_height = scene::image_height;
-        auto viewport_width = scene::image_width;
-        double aspect_ratio = viewport_width / viewport_height;
-        */
         auto aspect_ratio = scene::image_width / scene::image_height;
         auto viewport_height = 2.0;
         auto viewport_width = aspect_ratio * viewport_height;
