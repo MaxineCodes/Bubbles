@@ -90,7 +90,7 @@ Once the materials are working, I'll start more seriously streamlining this part
 
 ## Day 15 | Materials, camera, and scene objects:
 
-![image](https://github.com/MaxineCodes/Bubbles/blob/master/Blog/materials.jpg)
+![image](https://github.com/MaxineCodes/Bubbles/blob/master/Blog/material.jpg)
 
 There are now 3 types of materials: Lambert, Metallic, Dielectric. Lamberts only have a simple albedo colour variable, the metallic have a albedo colour and a roughness variable, and the dielectric material simply has an index of refraction.
 
