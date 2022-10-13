@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scene.h"
+#include "utils.h"
 
 class camera
 {
@@ -25,6 +25,7 @@ public:
             double aperture, 
             double focusDistance)
     {
+
         // Image variables
         auto theta = degreesToRadians(FOV);
         auto h = tan(theta / 2);

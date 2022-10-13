@@ -21,9 +21,9 @@ I hope this project turns out well!
 - ✅ Shadows
 - ✅ Antialiasing
 - ✅ Lambert material
-- ❌ Metal material
-- ❌ Dialectric material
-- ❌ Depth-of-field
+- ✅ Metal material
+- ✅ Dialectric material
+- ✅ Depth-of-field
 <br/>
 
 - ❌ UI: Outliner

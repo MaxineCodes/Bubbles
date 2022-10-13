@@ -13,37 +13,22 @@ public:
 	// Global raytrace settings
 
 	// Render variables
-	//static bool antialiasingEnabled; // Default = true
-	//static bool normalDebugMode; // Default = false
-	static bool rayBouncesEnabled; // Default = true ----- Currently unused
-	static const bool antialiasingEnabled = true; // Default = true
-	static const bool normalDebugMode = false; // Default = false
+	bool antialiasingEnabled = true; // Default = true
+	bool normalDebugMode = false; // Default = false
+	bool rayBouncesEnabled = true; // Default = true ----- Currently unused
+	int maxRayDepth = 10;
 
 	// Image variables
-	static const int image_width = 800;
-	static const int image_height = 400;
+	int image_width = 200;
+	int image_height = 100;
+	int raytraceSamples = 25;
 	double aspect_ratio = image_width / image_height;
-	static const int raytraceSamples = 5;
-
-	//static QImage image();
 
 public:
 	// Scene object settings
 
 	// World
 	objectList world;
-
-	// Bubbles
-	// Some array[] of bubbles here
-
-	// Materials
-	// Some array[] of materials here
-
-	// Camera variables
-	static point3 position;
-	static point3 viewDirection;
-	static vector3 viewUp;
-	static double aperture;
 
 public:
 	// Constructor
@@ -62,13 +47,7 @@ public:
 	}
 
 	// Adds a new bubble object to the scene
-	static void addBubble() 
-	{
-
-	}
-
-	// Adds a new material object to the scene
-	static void addMaterial()
+	static void add(point3 position, double radius, std::shared_ptr<material> material)
 	{
 
 	}

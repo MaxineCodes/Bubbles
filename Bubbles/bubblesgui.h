@@ -19,6 +19,8 @@ private:
 
 public: 
 	// GUI functions
+	void updateScene();
+	void updateCamera();
 	void setViewportImage(QImage image);
 	void setProgressbarValue(int progress);
 	void render();

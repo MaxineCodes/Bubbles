@@ -16,29 +16,31 @@
 // Qt Gui public variables
 int progressbarProgress;
 // Image
-QImage QImage32bit(scene::image_width, scene::image_height, QImage::Format_RGB32);
+QImage QImage32bit(100, 100, QImage::Format_RGB32);
 
 // Helper function declarations
-colour rayColour(const ray& _ray, const collidable& _world, int depth);
+colour rayColour(const ray& _ray, const collidable& _world, int depth, bool normalDebugMode);
 void writeQImage32(int x, int y, colour pixelColour, int samples);
 void write_color(std::ostream& out, colour pixel_color, int samples_per_pixel);
 double hit_sphere(const point3& center, double radius, const ray& _ray);
 
 
 // Main rendering function
-void raytrace(scene Scene, int samples)
+void raytrace(scene Scene, camera cam, int samples)
 {
+	QImage32bit = QImage32bit.scaled(Scene.image_width, Scene.image_height);
+
 	// Materials
 	auto material_ground = std::make_shared<lambert>(colour(0.1, 0.1, 0.1));
 	auto material_center = std::make_shared<lambert>(colour(0.9, 0.9, 0.9));
 	auto material_left = std::make_shared<dielectric>(1.5);
-	auto material_right = std::make_shared<metallic>(colour(0.9, 0.9, 0.9), 0.05);
+	auto material_right = std::make_shared<metallic>(colour(0.9, 0.9, 0.9), 0.20);
 
 	// Bubbles
 	Scene.world.add(std::make_shared<bubble>(point3(0.0, -100.5, -1.0), 100.0, material_ground));
-	Scene.world.add(std::make_shared<bubble>(point3(0.0, 0.0, -1.0), 0.5, material_right));
-	//Scene.world.add(std::make_shared<bubble>(point3(-1.0, 0.0, -1.0), 0.5, material_left));
-	//Scene.world.add(std::make_shared<bubble>(point3(1.0, 0.0, -1.0), 0.5, material_right));
+	Scene.world.add(std::make_shared<bubble>(point3(0.0, 0.0, -1.0), 0.5, material_center));
+	Scene.world.add(std::make_shared<bubble>(point3(-1.0, 0.0, -1.0), 0.5, material_left));
+	Scene.world.add(std::make_shared<bubble>(point3(1.0, 0.0, -1.0), 0.5, material_right));
 
 	// Render
 	static bool antialiasing = Scene.antialiasingEnabled;
@@ -47,8 +49,7 @@ void raytrace(scene Scene, int samples)
 	static int image_width	= Scene.image_width;
 	static int image_height = Scene.image_height;
 	static double aspect_ratio = Scene.aspect_ratio;
-	//const int samples = Scene.raytraceSamples;
-	const int max_depth = 10;
+	const int max_depth = Scene.maxRayDepth;
 
 	// Camera
 	point3 lookfrom(0, 1, 8);
@@ -57,7 +58,7 @@ void raytrace(scene Scene, int samples)
 	auto dist_to_focus = (lookfrom - lookat).length();
 	auto aperture = 0.0;
 
-	camera cam(lookfrom, lookat, vup, 20, aspect_ratio, aperture, dist_to_focus);
+	//camera cam(lookfrom, lookat, vup, 20, aspect_ratio, aperture, dist_to_focus);
 
 
 	// Render
@@ -89,7 +90,7 @@ void raytrace(scene Scene, int samples)
 				
 
 				ray _ray = cam.get_ray(u, v);
-				pixelColour += rayColour(_ray, Scene.world, max_depth);
+				pixelColour += rayColour(_ray, Scene.world, max_depth, Scene.normalDebugMode);
 			}
 			// Write QImage
 			writeQImage32(x, y, pixelColour, samples);
@@ -110,7 +111,7 @@ void raytrace(scene Scene, int samples)
 // ________Helper functions________
 
 // Ray colour
-colour rayColour(const ray& _ray, const collidable& _world, int depth)
+colour rayColour(const ray& _ray, const collidable& _world, int depth, bool normalDebugMode)
 {
 	// Ray hits object in scenObjectList(_world)
 
@@ -122,17 +123,16 @@ colour rayColour(const ray& _ray, const collidable& _world, int depth)
 	if (_world.hit(_ray, 0.0001, infinity, rec)) 
 	{
 		// Render normals-only if normalDebugMode is true
-		if (scene::normalDebugMode)
+		if (normalDebugMode)
 		{
 			return 0.5 * (rec.normal + colour(1, 1, 1));
 		}
-
 		// Otherwise, render normally
 		ray scattered;
 		colour attenuation;
 		if (rec.mat_ptr->scatter(_ray, rec, attenuation, scattered)) 
 		{
-			return attenuation * rayColour(scattered, _world, depth - 1);
+			return attenuation * rayColour(scattered, _world, depth - 1, normalDebugMode);
 		}
 		return colour(0, 0, 0);
 	}
