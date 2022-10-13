@@ -11,15 +11,14 @@
 #include "utils.h"
 #include "scene.h"
 #include "camera.h"
-
-// Images
-QImage QImage32bit	(scene::image_width, scene::image_height, QImage::Format_RGB32);
-//QImage QImage8bit	(scene::image_width, scene::image_height, QImage::Format_Indexed8);
+#include "material.h"
 
 // Qt Gui public variables
 int progressbarProgress;
+// Image
+QImage QImage32bit(scene::image_width, scene::image_height, QImage::Format_RGB32);
 
-// Declare helper functions
+// Helper function declarations
 colour rayColour(const ray& _ray, const collidable& _world, int depth);
 void writeQImage32(int x, int y, colour pixelColour, int samples);
 void write_color(std::ostream& out, colour pixel_color, int samples_per_pixel);
@@ -29,12 +28,17 @@ double hit_sphere(const point3& center, double radius, const ray& _ray);
 // Main rendering function
 void raytrace(scene Scene, int samples)
 {
-	// Scene world where objects are placed
-	objectList sceneObjectList;
-	// Populate the scene world
-	//_scene.populate(sceneObjectList);
-	sceneObjectList.add(std::make_shared<bubble>(point3(0, 0, -1), 0.5));
-	sceneObjectList.add(std::make_shared<bubble>(point3(0, -5.5, -1), 5));
+	// Materials
+	auto material_ground = std::make_shared<lambert>(colour(0.1, 0.1, 0.1));
+	auto material_center = std::make_shared<lambert>(colour(0.9, 0.9, 0.9));
+	auto material_left = std::make_shared<dielectric>(1.5);
+	auto material_right = std::make_shared<metallic>(colour(0.9, 0.9, 0.9), 0.05);
+
+	// Bubbles
+	Scene.world.add(std::make_shared<bubble>(point3(0.0, -100.5, -1.0), 100.0, material_ground));
+	Scene.world.add(std::make_shared<bubble>(point3(0.0, 0.0, -1.0), 0.5, material_right));
+	//Scene.world.add(std::make_shared<bubble>(point3(-1.0, 0.0, -1.0), 0.5, material_left));
+	//Scene.world.add(std::make_shared<bubble>(point3(1.0, 0.0, -1.0), 0.5, material_right));
 
 	// Render
 	static bool antialiasing = Scene.antialiasingEnabled;
@@ -47,7 +51,13 @@ void raytrace(scene Scene, int samples)
 	const int max_depth = 10;
 
 	// Camera
-	camera cam;
+	point3 lookfrom(0, 1, 8);
+	point3 lookat(0, 0.25, -1);
+	vector3 vup(0, 1, 0);
+	auto dist_to_focus = (lookfrom - lookat).length();
+	auto aperture = 0.0;
+
+	camera cam(lookfrom, lookat, vup, 20, aspect_ratio, aperture, dist_to_focus);
 
 
 	// Render
@@ -79,7 +89,7 @@ void raytrace(scene Scene, int samples)
 				
 
 				ray _ray = cam.get_ray(u, v);
-				pixelColour += rayColour(_ray, sceneObjectList, max_depth);
+				pixelColour += rayColour(_ray, Scene.world, max_depth);
 			}
 			// Write QImage
 			writeQImage32(x, y, pixelColour, samples);
@@ -116,9 +126,15 @@ colour rayColour(const ray& _ray, const collidable& _world, int depth)
 		{
 			return 0.5 * (rec.normal + colour(1, 1, 1));
 		}
+
 		// Otherwise, render normally
-		point3 target = rec.p + rec.normal + random_unit_vector();
-		return 0.5 * rayColour(ray(rec.p, target - rec.p), _world, depth - 1);
+		ray scattered;
+		colour attenuation;
+		if (rec.mat_ptr->scatter(_ray, rec, attenuation, scattered)) 
+		{
+			return attenuation * rayColour(scattered, _world, depth - 1);
+		}
+		return colour(0, 0, 0);
 	}
 	
 	vector3 unit_direction = unit_vector(_ray.direction());

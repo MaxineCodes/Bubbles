@@ -2,11 +2,13 @@
 
 #include "utils.h"
 
+class material;
 
 struct objectRecord 
 {
     point3 p;
     vector3 normal;
+    std::shared_ptr<material> mat_ptr;
     double t{};
 
     // Calculate normal face

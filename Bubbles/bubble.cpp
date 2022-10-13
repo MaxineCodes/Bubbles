@@ -2,7 +2,7 @@
 
 
 // Class constructor
-bubble::bubble(point3 _center, double _radius) : center(_center), radius(_radius)
+bubble::bubble(point3 cen, double r, std::shared_ptr<material> m) : center(cen), radius(r), mat_ptr(m)
 {
 
 }
@@ -38,6 +38,7 @@ bool bubble::hit(const ray& _ray, double t_min, double t_max, objectRecord& rec)
     rec.p = _ray.at(rec.t);
     vector3 outward_normal = (rec.p - center) / radius;
     rec.setFaceNormal(_ray, outward_normal);
+    rec.mat_ptr = mat_ptr;
 
     return true;
 }

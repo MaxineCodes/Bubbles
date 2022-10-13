@@ -5,33 +5,50 @@
 class camera
 {
 private:
-    point3 origin;
+    // Private variables
+    point3 originPosition;
     point3 lower_left_corner;
+
     vector3 horizontal;
     vector3 vertical;
+    vector3 u, v, viewVector;
+
+    double lensSize;
 
 public:
-
     // Constructor
-    camera()
+    camera( point3 position, 
+            point3 viewDirection, 
+            vector3 viewUp, 
+            double FOV, 
+            double aspectRatio,
+            double aperture, 
+            double focusDistance)
     {
         // Image variables
-        auto aspect_ratio = scene::image_width / scene::image_height;
-        auto viewport_height = 2.0;
-        auto viewport_width = aspect_ratio * viewport_height;
+        auto theta = degreesToRadians(FOV);
+        auto h = tan(theta / 2);
+        auto viewport_height = 2.0 * h;
+        auto viewport_width = aspectRatio * viewport_height;
+
+        viewVector = unit_vector(position - viewDirection);
+        u = unit_vector(cross(viewUp, viewVector));
+        v = cross(viewVector, u);
 
         // Camera variables
-        //double focal_length = scene::focal_length;
-        double focal_length = 1.0;
+        horizontal = focusDistance * viewport_width * u;
+        vertical = focusDistance * viewport_height * v;
+        lower_left_corner = originPosition - horizontal / 2 - vertical / 2 - focusDistance * viewVector;
 
-        origin = point3(0, 0, 0);
-        horizontal = vector3(viewport_width, 0.0, 0.0);
-        vertical = vector3(0.0, viewport_height, 0.0);
-        lower_left_corner = origin - horizontal / 2 - vertical / 2 - vector3(0, 0, focal_length);
+        lensSize = aperture / 2;
+        originPosition = position;
     }
 
-    ray get_ray(double u, double v) const 
+    ray get_ray(double s, double t) const 
     {
-        return ray(origin, lower_left_corner + u * horizontal + v * vertical - origin);
+        vector3 rd = lensSize * random_in_unit_disk();
+        vector3 offset = u * rd.x() + v * rd.y();
+
+        return ray(originPosition + offset, lower_left_corner + s * horizontal + t * vertical - originPosition - offset);
     }
 };

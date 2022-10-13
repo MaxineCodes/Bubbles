@@ -85,3 +85,13 @@ Normals are calculated and displayed as image and there is a scene object, as we
 Diffuse rendering is now implemented, along with more GUI setup stuffs. I'm noticing that I need to restructure some of the code, mostly around the scene and objects side of things. The scene object will be containing the camera and all the materials and bubbles in the scene. Image/render related settings, such as image size, I'll probably store as static global variables that can be passed to the raytracing function. Before this, all this info was in the scene class itself, which made it messy to adjust those values. Learning moment!!
 
 Once the materials are working, I'll start more seriously streamlining this part of the program, so it can be modified by the UI without code that is _too_ messy...
+
+---
+
+## Day 15 | Materials, camera, and scene objects:
+
+![image](https://github.com/MaxineCodes/Bubbles/blob/master/Blog/materials.jpg)
+
+There are now 3 types of materials: Lambert, Metallic, Dielectric. Lamberts only have a simple albedo colour variable, the metallic have a albedo colour and a roughness variable, and the dielectric material simply has an index of refraction.
+
+The camera has also been reworked and it can now be blurry! The current next goal is to create a better management for the scene, and create easy functions so I can hook up the GUI interface without too much hassle.

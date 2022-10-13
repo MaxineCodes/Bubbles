@@ -97,6 +97,7 @@
   <ItemGroup>
     <ClInclude Include="bubble.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="material.h" />
     <ClInclude Include="ray.h" />
     <ClInclude Include="rayCollision.h" />
     <ClInclude Include="raytrace.h" />

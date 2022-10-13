@@ -1,9 +1,5 @@
 #include "bubblesgui.h"
-#include "raytrace.h"
-#include "scene.h"
-
 #include <QtGui>
-
 #include <iostream>
 
 // Class Constructor
@@ -19,7 +15,11 @@ bubblesGui::~bubblesGui()
 }
 
 // __________________________________________________________________________________________________________________________
+// Raytrace
+#include "raytrace.h"
+
 // Scene instance
+#include "scene.h"
 static scene Scene;
 
 // __________________________________________________________________________________________________________________________
@@ -61,7 +61,7 @@ public:
 void bubblesGui::setViewportImage(QImage image) 
 {
 	// Scale image to viewport size with padding
-	int padding = 24;
+	int padding = 64; // in pixels
 	QWidget* _viewport = ui.viewport;
 	int width = _viewport->width() - padding;
 	int height = _viewport->height() - padding;
